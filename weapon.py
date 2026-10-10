@@ -1,3 +1,4 @@
+#This file deals with all weapons in the game 
 import pygame 
 import math 
 
@@ -16,7 +17,7 @@ class Weapon():
     x_dist = pos[0] - self.rect.centerx 
     y_dist = -(pos[1] - self.rect.centery) # because pygame y coordinates increase down the screen.
     self.angle = math.degrees(math.atan2(y_dist, x_dist))
-    
+
 
   def draw(self, surface): 
     self.image = pygame.transform.rotate(self.original_image, self.angle)
