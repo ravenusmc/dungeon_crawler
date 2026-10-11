@@ -1,3 +1,4 @@
+#The main game file. 
 import pygame 
 import constants
 from character import Character
