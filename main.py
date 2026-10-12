@@ -50,7 +50,10 @@ for mob in mob_types:
 
 # Create Player 
 player = Character(100,100, mob_animations, 0)
-bow = Weapon(bow_image)
+bow = Weapon(bow_image, arrow_image)
+
+#Create Sprite Groups
+arrow_group = pygame.sprite.Group()
 
 #Main game loop 
 run = True
@@ -78,11 +81,16 @@ while run:
 
   #Update player 
   player.update()
-  bow.update(player)
+  arrow = bow.update(player)
+  if arrow:
+    arrow_group.add(arrow)
 
   #Draw player on screen 
   player.draw(screen)
   bow.draw(screen)
+  for arrow in arrow_group: 
+    arrow.draw(screen)
+
 
   #Event handler 
   for event in pygame.event.get():
