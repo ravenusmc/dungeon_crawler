@@ -1,3 +1,4 @@
+#This file deals with the character. 
 import pygame 
 import math 
 import constants
