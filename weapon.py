@@ -1,6 +1,7 @@
 #This file deals with all weapons in the game 
 import pygame 
 import math 
+import constants
 
 class Weapon():
 
@@ -11,8 +12,10 @@ class Weapon():
     self.arrow_image = arrow_image
     self.rect = self.image.get_rect()
     self.fired = False 
+    self.last_shot = pygame.time.get_ticks()
 
   def update(self, player): 
+    shot_cooldown = 300
     arrow = None
     self.rect.center = player.rect.center 
 
@@ -22,9 +25,10 @@ class Weapon():
     self.angle = math.degrees(math.atan2(y_dist, x_dist))
 
     #get mouse click 
-    if pygame.mouse.get_pressed()[0] and self.fired == False:
+    if pygame.mouse.get_pressed()[0] and self.fired == False and (pygame.time.get_ticks() - self.last_shot) >= shot_cooldown:
       arrow = Arrow(self.arrow_image, self.rect.centerx, self.rect.centery, self.angle) 
       self.fired = True 
+      self.last_shot = pygame.time.get_ticks()
     if pygame.mouse.get_pressed()[0] == False: 
       self.fired = False 
     return arrow
@@ -39,9 +43,17 @@ class Arrow(pygame.sprite.Sprite):
     pygame.sprite.Sprite.__init__(self)
     self.original_image = image
     self.angle = angle 
-    self.image = pygame.transform.rotate(self.original_image, self.angle)
+    self.image = pygame.transform.rotate(self.original_image, self.angle - 90)
     self.rect = self.image.get_rect() 
     self.rect.center = (x,y)
+    #Calculate the horizontal and vertical speeds based on the angle 
+    self.dx = math.cos(math.radians(self.angle)) * constants.ARROW_SPEED
+    self.dy = -math.sin(math.radians(self.angle)) * constants.ARROW_SPEED #Negative becasue pygame y coordinate increases down the screen 
+
+  def update(self):
+    #Reposition based on speed 
+    self.rect.x += self.dx 
+    self.rect.y += self.dy
 
   def draw(self, surface):
     surface.blit(self.image, ((self.rect.centerx - int(self.image.get_width()/2)), self.rect.centery - int(self.image.get_height()/2)))

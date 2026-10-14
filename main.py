@@ -84,6 +84,8 @@ while run:
   arrow = bow.update(player)
   if arrow:
     arrow_group.add(arrow)
+  for arrow in arrow_group: 
+    arrow.update() 
 
   #Draw player on screen 
   player.draw(screen)
