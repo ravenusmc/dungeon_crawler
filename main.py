@@ -92,6 +92,7 @@ while run:
   bow.draw(screen)
   for arrow in arrow_group: 
     arrow.draw(screen)
+  print(arrow_group)
 
 
   #Event handler 
