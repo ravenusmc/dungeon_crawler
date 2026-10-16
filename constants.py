@@ -1,3 +1,4 @@
+# This file will contain all of the constants. 
 FPS = 60
 SCREEN_WIDTH = 800 
 SCREEN_HEIGHT = 600
