@@ -8,7 +8,6 @@ SPEED = 5
 ARROW_SPEED = 10
 OFFSET = 12
 
-
 RED = (255,0,0)
 BG = (40,25,25)
 
