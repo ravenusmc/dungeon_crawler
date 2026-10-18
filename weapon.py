@@ -52,6 +52,8 @@ class Arrow(pygame.sprite.Sprite):
     self.dy = -math.sin(math.radians(self.angle)) * constants.ARROW_SPEED #Negative becasue pygame y coordinate increases down the screen 
 
   def update(self, enemy_list):
+    #reset variables 
+    damage = 0
     #Reposition based on speed 
     self.rect.x += self.dx 
     self.rect.y += self.dy
@@ -67,6 +69,8 @@ class Arrow(pygame.sprite.Sprite):
         enemy.health -= damage
         self.kill() 
         break 
+
+    return damage
 
   def draw(self, surface):
     surface.blit(self.image, ((self.rect.centerx - int(self.image.get_width()/2)), self.rect.centery - int(self.image.get_height()/2)))
