@@ -27,9 +27,15 @@ def scale_img(image, scale):
   h = image.get_height()
   return pygame.transform.scale(image, (w* scale, h * scale))
 
+#Load Heart images 
+heart_empty = scale_img(pygame.image.load('assets/images/items/heart_empty.png').convert_alpha(), constants.ITEM_SCALE)
+heart_half  = scale_img(pygame.image.load('assets/images/items/heart_half.png').convert_alpha(), constants.ITEM_SCALE)
+heart_full = scale_img(pygame.image.load('assets/images/items/heart_full.png').convert_alpha(), constants.ITEM_SCALE)
+
 #Load weapon images 
 bow_image = scale_img(pygame.image.load('assets/images/weapons/bow.png').convert_alpha(), constants.WEAPON_SCALE)
 arrow_image = scale_img(pygame.image.load('assets/images/weapons/arrow.png').convert_alpha(), constants.WEAPON_SCALE)
+
 
 #Load character images 
 mob_animations = [] 
@@ -51,6 +57,14 @@ for mob in mob_types:
     animation_list.append(temp_list)
   mob_animations.append(animation_list)
 
+#Function for displaying game info 
+def draw_info():
+  #draw lives 
+  for i in range(5):
+    if player.health >= ((i + 1) * 20):
+      screen.blit(heart_full, (10 + i * 50, 0))
+
+
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):
 
@@ -68,7 +82,6 @@ class DamageText(pygame.sprite.Sprite):
     self.counter += 1 
     if self.counter > 30: 
       self.kill()
-
 
 
 # Create Player 
@@ -137,6 +150,8 @@ while run:
   for arrow in arrow_group: 
     arrow.draw(screen)
   damage_text_group.draw(screen)
+  draw_info()
+
 
 
   #Event handler 
