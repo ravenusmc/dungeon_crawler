@@ -33,6 +33,9 @@ heart_half  = scale_img(pygame.image.load('assets/images/items/heart_half.png').
 heart_full = scale_img(pygame.image.load('assets/images/items/heart_full.png').convert_alpha(), constants.ITEM_SCALE)
 
 #Load in Coin images 
+coin_images = []
+for x in range(4):
+  img = scale_img(pygame.image.load(f'assets/images/items/coin_f{x}.png').convert_alpha(), constants.ITEM_SCALE)
 
 #Load weapon images 
 bow_image = scale_img(pygame.image.load('assets/images/weapons/bow.png').convert_alpha(), constants.WEAPON_SCALE)
