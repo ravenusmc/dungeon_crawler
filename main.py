@@ -3,6 +3,7 @@ import pygame
 import constants
 from character import Character
 from weapon import Weapon
+from items import Item 
 
 pygame.init()
 
@@ -36,6 +37,10 @@ heart_full = scale_img(pygame.image.load('assets/images/items/heart_full.png').c
 coin_images = []
 for x in range(4):
   img = scale_img(pygame.image.load(f'assets/images/items/coin_f{x}.png').convert_alpha(), constants.ITEM_SCALE)
+  coin_images.append(img)
+
+#load potion image 
+red_potion = scale_img(pygame.image.load('assets/images/items/potion_red.png').convert_alpha(), constants.POTION_SCALE)
 
 #Load weapon images 
 bow_image = scale_img(pygame.image.load('assets/images/weapons/bow.png').convert_alpha(), constants.WEAPON_SCALE)
@@ -110,11 +115,16 @@ enemy_list.append(enemy)
 #Create Sprite Groups
 damage_text_group = pygame.sprite.Group()
 arrow_group = pygame.sprite.Group()
+item_group = pygame.sprite.Group()
 
 #temp damage text 
 # damage_text = DamageText(300, 400, "15", constants.RED)
 # damage_text_group.add(damage_text)
 
+potion = Item(200, 200, 1, [red_potion])
+item_group.add(potion)
+coin = Item(400,400, 0, coin_images)
+item_group.add(coin)
 
 #Main game loop 
 run = True
@@ -153,6 +163,7 @@ while run:
       damage_text = DamageText(damage_pos.centerx, damage_pos.y, str(damage), constants.RED)
       damage_text_group.add(damage_text)
   damage_text_group.update()
+  item_group.update()
 
   #Draw player on screen 
   for enemy in enemy_list:
@@ -163,6 +174,7 @@ while run:
     arrow.draw(screen)
   damage_text_group.draw(screen)
   draw_info()
+  item_group.draw(screen)
 
 
 
