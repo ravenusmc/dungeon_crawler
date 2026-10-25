@@ -67,6 +67,12 @@ for mob in mob_types:
     animation_list.append(temp_list)
   mob_animations.append(animation_list)
 
+#Function for outputting text onto screen 
+def draw_text(text,font, text_col, x, y):
+  img = font.render(text, True, text_col)
+  screen.blit(img, (x,y))
+
+
 #Function for displaying game info 
 def draw_info():
   pygame.draw.rect(screen, constants.PANEL, (0, 0, constants.SCREEN_WIDTH, 50))
@@ -81,6 +87,8 @@ def draw_info():
       half_heart_drawn = True
     else: 
       screen.blit(heart_empty, (10 + i * 50, 0))
+  #Show score 
+  draw_text(f"X{player.score}", font, constants.WHITE, constants.SCREEN_WIDTH - 100, 15)
       
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):
@@ -126,6 +134,9 @@ item_group.add(potion)
 coin = Item(400,400, 0, coin_images)
 item_group.add(coin)
 
+score_coin = Item(constants.SCREEN_WIDTH - 115, 23, 0, coin_images)
+item_group.add(score_coin)
+
 #Main game loop 
 run = True
 while run:
@@ -163,7 +174,7 @@ while run:
       damage_text = DamageText(damage_pos.centerx, damage_pos.y, str(damage), constants.RED)
       damage_text_group.add(damage_text)
   damage_text_group.update()
-  item_group.update()
+  item_group.update(player)
 
   #Draw player on screen 
   for enemy in enemy_list:
@@ -173,10 +184,9 @@ while run:
   for arrow in arrow_group: 
     arrow.draw(screen)
   damage_text_group.draw(screen)
-  draw_info()
   item_group.draw(screen)
-
-
+  draw_info()
+  score_coin.draw(screen)
 
   #Event handler 
   for event in pygame.event.get():

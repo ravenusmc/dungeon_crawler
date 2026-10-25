@@ -12,7 +12,18 @@ class Item(pygame.sprite.Sprite):
     self.rect = self.image.get_rect()
     self.rect.center = (x,y)
 
-  def update(self):
+  def update(self, player):
+    #Check to see if items has been collected by player 
+    if self.rect.colliderect(player.rect):
+      #coin collected 
+      if self.item_type == 0:
+        player.score += 1
+      elif self.item_type == 1:
+        player.health += 10
+        if player.health > 100:
+          player.health = 100
+      self.kill()
+        
     #handle animation 
     animation_cooldown = 150
     #update image 
@@ -24,6 +35,9 @@ class Item(pygame.sprite.Sprite):
     #Check if animation has finished 
     if self.frame_index >= len(self.animation_list):
       self.frame_index = 0 
+
+  def draw(self, surface):
+    surface.blit(self.image, self.rect)
 
 
     
