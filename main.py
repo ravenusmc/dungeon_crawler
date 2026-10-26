@@ -89,6 +89,14 @@ def draw_info():
       screen.blit(heart_empty, (10 + i * 50, 0))
   #Show score 
   draw_text(f"X{player.score}", font, constants.WHITE, constants.SCREEN_WIDTH - 100, 15)
+
+world_data = [
+  [7,7,7,7,7],
+  [7,0,1,2,7], 
+  [7,3,4,5,7],
+  [7,6,6,6,7],
+  [7,7,7,7,7],
+]
       
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):
