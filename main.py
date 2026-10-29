@@ -46,6 +46,12 @@ red_potion = scale_img(pygame.image.load('assets/images/items/potion_red.png').c
 bow_image = scale_img(pygame.image.load('assets/images/weapons/bow.png').convert_alpha(), constants.WEAPON_SCALE)
 arrow_image = scale_img(pygame.image.load('assets/images/weapons/arrow.png').convert_alpha(), constants.WEAPON_SCALE)
 
+#Load Tile map images 
+tile_list = []
+for x in range(constants.TILE_TYPES):
+  tile_image = pygame.image.load(f"assets/images/tiles/{x}.png").convert_alpha() 
+  tile_image = pygame.transform.scale(tile_image, (constants.TILE_SIZE, constants.TILE_SIZE))
+  tile_list.append(tile_image)
 
 #Load character images 
 mob_animations = [] 
