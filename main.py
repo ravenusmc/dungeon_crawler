@@ -4,6 +4,7 @@ import constants
 from character import Character
 from weapon import Weapon
 from items import Item 
+from world import World 
 
 pygame.init()
 
@@ -97,12 +98,17 @@ def draw_info():
   draw_text(f"X{player.score}", font, constants.WHITE, constants.SCREEN_WIDTH - 100, 15)
 
 world_data = [
-  [7,7,7,7,7],
-  [7,0,1,2,7], 
-  [7,3,4,5,7],
-  [7,6,6,6,7],
-  [7,7,7,7,7],
+  [7,7,7,7,7,7],
+  [7,0,1,2,3,7], 
+  [7,3,4,5,5,7],
+  [7,6,6,6,6,7],
+  [7,0,0,0,0,7],
+  [7,7,7,7,0,7],
 ]
+
+world = World()
+world.process_data(world_data, tile_list)
+
       
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):
@@ -191,6 +197,7 @@ while run:
   item_group.update(player)
 
   #Draw player on screen 
+  world.draw(screen)
   for enemy in enemy_list:
     enemy.draw(screen)
   player.draw(screen)
