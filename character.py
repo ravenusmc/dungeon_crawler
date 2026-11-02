@@ -22,6 +22,7 @@ class Character():
     self.rect.center = (x,y)
 
   def move(self, dx, dy):
+    screen_scroll = [0,0]
     self.running = False 
     if dx != 0 or dy != 0: 
       self.running = True 
@@ -35,6 +36,17 @@ class Character():
       dy = dy * (math.sqrt(2)/2)
     self.rect.x += dx
     self.rect.y += dy
+    #Logic only applicable  
+    if self.char_type == 0:
+      #update scroll based on player position 
+      #move camera left and right 
+      if self.rect.right > (constants.SCREEN_WIDTH - constants.SCROLL_THRESH): 
+        screen_scroll[0] = (constants.SCREEN_WIDTH - constants.SCROLL_THRESH) - self.rect.right 
+        self.rect.right = constants.SCREEN_WIDTH - constants.SCROLL_THRESH
+      if self.rect.left < constants.SCROLL_THRESH: 
+        screen_scroll[0] = constants.SCROLL_THRESH - self.rect.left
+        self.rect.left = constants.SCROLL_THRESH
+    return screen_scroll
 
   def update(self):
     #Check if character has died  

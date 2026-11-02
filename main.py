@@ -17,6 +17,8 @@ clock = pygame.time.Clock()
 
 #Define game variables 
 level = 1 
+screen_scroll = [0,0]
+
 
 #Define palyer movement variables 
 moving_left = False 
@@ -107,13 +109,14 @@ for row in range(constants.ROWS):
     r = [-1] * constants.COLS 
     world_data.append(r)
 #Load in level data and create world 
-with open("levels/level1_data.csv", newline="") as csvfile: 
+with open(f"levels/level{level}_data.csv", newline="") as csvfile: 
   reader = csv.reader(csvfile, delimiter=",")
-
+  for x, row in enumerate(reader):
+    for y, tile in enumerate(row):
+      world_data[x][y] = int(tile)
 
 world = World()
 world.process_data(world_data, tile_list)
-
       
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):
@@ -135,7 +138,7 @@ class DamageText(pygame.sprite.Sprite):
 
 
 # Create Player 
-player = Character(100,100, 100, mob_animations, 0)
+player = Character(400,300, 100, mob_animations, 0)
 bow = Weapon(bow_image, arrow_image)
 
 # Create Enemy 
@@ -184,7 +187,7 @@ while run:
     dy = constants.SPEED
 
   #move player 
-  player.move(dx, dy)
+  screen_scroll = player.move(dx, dy)
 
   #Update player 
   for enemy in enemy_list: 
