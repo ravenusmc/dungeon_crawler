@@ -189,7 +189,8 @@ while run:
   #move player 
   screen_scroll = player.move(dx, dy)
 
-  #Update player 
+  #Update all objects
+  world.update(screen_scroll) 
   for enemy in enemy_list: 
     enemy.update()
   player.update()
@@ -202,7 +203,7 @@ while run:
       damage_text = DamageText(damage_pos.centerx, damage_pos.y, str(damage), constants.RED)
       damage_text_group.add(damage_text)
   damage_text_group.update()
-  item_group.update(player)
+  item_group.update(screen_scroll, player)
 
   #Draw player on screen 
   world.draw(screen)

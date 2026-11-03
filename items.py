@@ -12,7 +12,10 @@ class Item(pygame.sprite.Sprite):
     self.rect = self.image.get_rect()
     self.rect.center = (x,y)
 
-  def update(self, player):
+  def update(self, screen_scroll, player):
+    #Reposition based on screen scroll
+    self.rect.x += screen_scroll[0]
+    self.rect.y += screen_scroll[1]
     #Check to see if items has been collected by player 
     if self.rect.colliderect(player.rect):
       #coin collected 
