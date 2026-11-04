@@ -162,7 +162,7 @@ item_group.add(potion)
 coin = Item(400,400, 0, coin_images)
 item_group.add(coin)
 
-score_coin = Item(constants.SCREEN_WIDTH - 115, 23, 0, coin_images)
+score_coin = Item(constants.SCREEN_WIDTH - 115, 23, 0, coin_images, True)
 item_group.add(score_coin)
 
 #Main game loop 
