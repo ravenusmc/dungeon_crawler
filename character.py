@@ -55,6 +55,12 @@ class Character():
         self.rect.top = constants.SCROLL_THRESH
     return screen_scroll
 
+  def ai(self, screen_scroll):
+    #Reposition the mobs based on screen scroll 
+    self.rect.x += screen_scroll[0]
+    self.rect.y += screen_scroll[1]
+
+
   def update(self):
     #Check if character has died  
     if self.health <= 0: 
