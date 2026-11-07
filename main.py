@@ -49,6 +49,10 @@ for x in range(4):
 #load potion image 
 red_potion = scale_img(pygame.image.load('assets/images/items/potion_red.png').convert_alpha(), constants.POTION_SCALE)
 
+item_images = []
+item_images.append(coin_images)
+item_images.append(red_potion)
+
 #Load weapon images 
 bow_image = scale_img(pygame.image.load('assets/images/weapons/bow.png').convert_alpha(), constants.WEAPON_SCALE)
 arrow_image = scale_img(pygame.image.load('assets/images/weapons/arrow.png').convert_alpha(), constants.WEAPON_SCALE)
@@ -100,6 +104,10 @@ def draw_info():
       half_heart_drawn = True
     else: 
       screen.blit(heart_empty, (10 + i * 50, 0))
+
+  #Level 
+  draw_text("Level: " + str(level), font, constants.WHITE, constants.SCREEN_WIDTH / 2, 15)
+
   #Show score 
   draw_text(f"X{player.score}", font, constants.WHITE, constants.SCREEN_WIDTH - 100, 15)
 
@@ -116,7 +124,7 @@ with open(f"levels/level{level}_data.csv", newline="") as csvfile:
       world_data[x][y] = int(tile)
 
 world = World()
-world.process_data(world_data, tile_list)
+world.process_data(world_data, tile_list, item_images)
       
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):

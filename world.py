@@ -1,12 +1,16 @@
 #This file will build the world 
 import constants
+from items import Item  
 
 class World():
 
   def __init__(self):
     self.map_tiles = []
+    self.obstacles_tiles = []
+    self.exit_tile = None
+    self.item_list = []
 
-  def process_data(self, data, tile_list):
+  def process_data(self, data, tile_list, item_images):
     self.level_length = len(data)
     #iterate through each value.
     for y, row in enumerate(data): 
@@ -17,6 +21,13 @@ class World():
         image_y = y * constants.TILE_SIZE
         image_rect.center = (image_x, image_y)
         tile_data = [image, image_rect, image_x, image_y]
+        if tile == 7: 
+          self.obstacles_tiles.append(tile_data)
+        elif tile == 8: 
+          self.exit_tile = tile_data
+        elif tile == 9: 
+          coin = Item(image_x, image_y, 0, item_images[0])
+          self.item_list.append(coin)
         #Add image data to main tiles list 
         if tile >= 0:
           self.map_tiles.append(tile_data)
