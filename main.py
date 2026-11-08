@@ -124,7 +124,7 @@ with open(f"levels/level{level}_data.csv", newline="") as csvfile:
       world_data[x][y] = int(tile)
 
 world = World()
-world.process_data(world_data, tile_list, item_images)
+world.process_data(world_data, tile_list, item_images, mob_animations)
       
 #Damage Text Class 
 class DamageText(pygame.sprite.Sprite):
@@ -150,7 +150,7 @@ class DamageText(pygame.sprite.Sprite):
 
 
 # Create Player 
-player = Character(400,300, 100, mob_animations, 0)
+player = world.player
 bow = Weapon(bow_image, arrow_image)
 
 # Create Enemy 
@@ -165,17 +165,12 @@ damage_text_group = pygame.sprite.Group()
 arrow_group = pygame.sprite.Group()
 item_group = pygame.sprite.Group()
 
-#temp damage text 
-# damage_text = DamageText(300, 400, "15", constants.RED)
-# damage_text_group.add(damage_text)
-
-potion = Item(200, 200, 1, [red_potion])
-item_group.add(potion)
-coin = Item(400,400, 0, coin_images)
-item_group.add(coin)
-
 score_coin = Item(constants.SCREEN_WIDTH - 115, 23, 0, coin_images, True)
 item_group.add(score_coin)
+
+#Add items from the level data 
+for item in world.item_list:
+  item_group.add(item)
 
 #Main game loop 
 run = True

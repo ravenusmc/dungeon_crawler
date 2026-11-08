@@ -1,6 +1,7 @@
 #This file will build the world 
 import constants
 from items import Item  
+from character import Character
 
 class World():
 
@@ -9,8 +10,9 @@ class World():
     self.obstacles_tiles = []
     self.exit_tile = None
     self.item_list = []
+    self.player = None
 
-  def process_data(self, data, tile_list, item_images):
+  def process_data(self, data, tile_list, item_images, mob_animations):
     self.level_length = len(data)
     #iterate through each value.
     for y, row in enumerate(data): 
@@ -28,6 +30,15 @@ class World():
         elif tile == 9: 
           coin = Item(image_x, image_y, 0, item_images[0])
           self.item_list.append(coin)
+          tile_data[0] = tile_list[0]
+        elif tile == 10: 
+          potion = Item(image_x, image_y, 1, [item_images[1]])
+          self.item_list.append(potion)
+          tile_data[0] = tile_list[0]
+        elif tile == 11: 
+          player = Character(image_x, image_y, 100, mob_animations, 0)
+          self.player = player
+          tile_data[0] = tile_list[0]
         #Add image data to main tiles list 
         if tile >= 0:
           self.map_tiles.append(tile_data)
