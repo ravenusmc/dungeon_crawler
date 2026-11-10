@@ -16,7 +16,7 @@ pygame.display.set_caption("Dungeon Crawler")
 clock = pygame.time.Clock()
 
 #Define game variables 
-level = 1 
+level = 3  
 screen_scroll = [0,0]
 
 
@@ -148,14 +148,12 @@ class DamageText(pygame.sprite.Sprite):
     if self.counter > 30: 
       self.kill()
 
-
 # Create Player 
 player = world.player
 bow = Weapon(bow_image, arrow_image)
 
 #Create empty enemy list 
 enemy_list = world.character_list
-
 
 #Create Sprite Groups
 damage_text_group = pygame.sprite.Group()

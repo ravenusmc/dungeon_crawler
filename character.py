@@ -5,7 +5,7 @@ import constants
 
 class Character():
 
-  def __init__(self,x,y, health, mob_animations, char_type):
+  def __init__(self,x,y, health, mob_animations, char_type, boss):
     self.char_type = char_type
     self.score = 0
     self.flip = False 
