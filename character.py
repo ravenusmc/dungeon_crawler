@@ -5,8 +5,10 @@ import constants
 
 class Character():
 
-  def __init__(self,x,y, health, mob_animations, char_type, boss):
+  def __init__(self,x,y, health, mob_animations, char_type, boss, size):
     self.char_type = char_type
+    self.boss = boss 
+
     self.score = 0
     self.flip = False 
     self.animation_list = mob_animations[char_type]
@@ -18,7 +20,7 @@ class Character():
     self.alive = True 
 
     self.image = self.animation_list[self.action][self.frame_index]
-    self.rect = pygame.Rect(0, 0, constants.TILE_SIZE, 40)
+    self.rect = pygame.Rect(0, 0, constants.TILE_SIZE * size, constants.TILE_SIZE * size)
     self.rect.center = (x,y)
 
   def move(self, dx, dy):
