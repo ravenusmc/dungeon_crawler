@@ -23,7 +23,7 @@ class Character():
     self.rect = pygame.Rect(0, 0, constants.TILE_SIZE * size, constants.TILE_SIZE * size)
     self.rect.center = (x,y)
 
-  def move(self, dx, dy):
+  def move(self, dx, dy, obstacle_tiles):
     screen_scroll = [0,0]
     self.running = False 
     if dx != 0 or dy != 0: 
@@ -36,7 +36,12 @@ class Character():
     if dx != 0 and dy != 0:
       dx = dx * (math.sqrt(2)/2)
       dy = dy * (math.sqrt(2)/2)
+
+    #Check for collision with map in x direction 
     self.rect.x += dx
+    for obstacle in obstacle_tiles: 
+      #check for collision 
+      
     self.rect.y += dy
     #Logic only applicable  
     if self.char_type == 0:
