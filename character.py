@@ -41,7 +41,13 @@ class Character():
     self.rect.x += dx
     for obstacle in obstacle_tiles: 
       #check for collision 
-      
+      if obstacle[1].colliderect(self.rect): 
+        #Check which side collision is from 
+        if dx > 0: 
+          self.rect.right = obstacle[1].left
+        if dx < 0: 
+          self.rect.left = obstacle[1].right
+
     self.rect.y += dy
     #Logic only applicable  
     if self.char_type == 0:
