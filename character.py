@@ -47,8 +47,17 @@ class Character():
           self.rect.right = obstacle[1].left
         if dx < 0: 
           self.rect.left = obstacle[1].right
-
+    #Check for collision with map in y direction 
     self.rect.y += dy
+    for obstacle in obstacle_tiles: 
+      #check for collision 
+      if obstacle[1].colliderect(self.rect): 
+        #Check which side collision is from 
+        if dy > 0: 
+          self.rect.bottom = obstacle[1].top
+        if dy < 0: 
+          self.rect.top = obstacle[1].bottom
+
     #Logic only applicable  
     if self.char_type == 0:
       #update scroll based on player position 
