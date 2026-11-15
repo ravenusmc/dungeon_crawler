@@ -77,10 +77,39 @@ class Character():
         self.rect.top = constants.SCROLL_THRESH
     return screen_scroll
 
-  def ai(self, screen_scroll):
+  def ai(self, player, obstacle_tiles, screen_scroll):
+    clipped_line = ()
+    ai_dx = 0 
+    ai_dy = 0
+
     #Reposition the mobs based on screen scroll 
     self.rect.x += screen_scroll[0]
     self.rect.y += screen_scroll[1]
+
+    #Create a line of sight from the enemy to the player 
+    line_of_sight = ((self.rect.centerx, self.rect.centery), (player.rect.centerx, player.rect.centery))
+
+    #Check if line of sight passes through obstacle tile 
+    for obstacle in obstacle_tiles: 
+      if obstacle[1].clipline(line_of_sight):
+        clipped_line = obstacle[1].clipline(line_of_sight)
+
+    #Check distance to player 
+    dist = math.sqrt(((self.rect.centerx - player.rect.centerx) ** 2) + ((self.rect.centery - player.rect.centery) ** 2))
+    if not clipped_line and dist > constants.RANGE: 
+      if self.rect.centerx > player.rect.centerx:
+        ai_dx = -constants.ENEMY_SPEED
+      if self.rect.centerx < player.rect.centerx:
+        ai_dx = constants.ENEMY_SPEED
+      if self.rect.centery > player.rect.centerx:
+        ai_dy = -constants.ENEMY_SPEED
+      if self.rect.centery < player.rect.centerx:
+        ai_dy = constants.ENEMY_SPEED
+
+    self.move(ai_dx, ai_dy, obstacle_tiles)
+    #attack player 
+    if dist < constants.ATTACK_RANGE:
+      player.health -= 10
 
 
   def update(self):
