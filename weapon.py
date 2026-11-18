@@ -1,4 +1,4 @@
-#This file deals with all weapons in the game 
+#This file deals with all weapons in the game and how they are handled. 
 import pygame 
 import math 
 import random
