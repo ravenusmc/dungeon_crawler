@@ -1,4 +1,4 @@
-#This file will deal with the items. 
+#This file will deal with the items and how they work in the game. 
 import pygame 
 
 class Item(pygame.sprite.Sprite):
