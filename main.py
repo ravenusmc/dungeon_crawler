@@ -19,8 +19,7 @@ clock = pygame.time.Clock()
 level = 1  
 screen_scroll = [0,0]
 
-
-#Define palyer movement variables 
+#Define player movement variables 
 moving_left = False 
 moving_right = False
 moving_up = False 
