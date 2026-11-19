@@ -1,4 +1,4 @@
-#The main game file. 
+#The main game file that brings everything together for the game. 
 import pygame 
 import csv
 import constants
