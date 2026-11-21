@@ -1,6 +1,8 @@
 # Dungeon Crawler 
 ## Intro
 
+This is a game made with Python's pygame library. 
+
 
 # Getting started
 ### Installing
