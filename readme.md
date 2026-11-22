@@ -1,7 +1,8 @@
 # Dungeon Crawler 
 ## Intro
 
-This is a game made with Python's pygame library. 
+This is a game made with Python's pygame library. It is a simple dungeon crawler - something that I've always wanted to build. I got the 
+course off of Udemy - so no, I'm not building this all by myself. 
 
 
 # Getting started
