@@ -38,4 +38,4 @@ Nothing - yet.
 
 # Preview
 
-To see a video that talks about this project please go here: COMING SOON
+To see a video that talks about this project please go here: COMING SOON - Maybe - One Day
