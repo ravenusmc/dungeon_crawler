@@ -18,6 +18,8 @@ class Character():
     self.running = False
     self.health = health
     self.alive = True 
+    self.hit = False 
+    self.last_hit = pygame.time.get_ticks()
 
     self.image = self.animation_list[self.action][self.frame_index]
     self.rect = pygame.Rect(0, 0, constants.TILE_SIZE * size, constants.TILE_SIZE * size)
@@ -108,8 +110,10 @@ class Character():
 
     self.move(ai_dx, ai_dy, obstacle_tiles)
     #attack player 
-    if dist < constants.ATTACK_RANGE:
+    if dist < constants.ATTACK_RANGE and player.hit == False:
       player.health -= 10
+      player.hit = True 
+      player.last_hit = pygame.time.get_ticks()
 
 
   def update(self):
