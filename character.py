@@ -121,6 +121,12 @@ class Character():
     if self.health <= 0: 
       self.health = 0 
       self.alive = False 
+
+    #Timer to reset player taking hit 
+    hit_cooldown = 1000
+    if self.char_type == 0: 
+      if self.hit == True and (pygame.time.get_ticks() - self.last_hit) > hit_cooldown: 
+        self.hit = False 
       
     #Check what action the player is performing 
     if self.running == True: 
